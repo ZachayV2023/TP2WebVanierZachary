@@ -1,1 +1,23 @@
-<p>add-voyage works!</p>
+<div class="box">
+    <h2>Nouveau Voyage</h2>
+    <div class="input-group">
+      <label for="voyage-title">Titre du voyage</label>
+      <input id="voyage-title" type="text">
+    </div>
+    <div class="input-group">
+      <input id="voyage-public" type="checkbox">
+      <label for="voyage-public">Voyage public</label>
+    </div>
+    <div class="input-group">
+      <label for="image-upload">Télécharge une image</label>
+      <input id="image-upload" type="file" (change)="onImageChange($event)">
+    </div>
+    <div class="image-preview">
+      <img *ngIf="imageURL" [src]="imageURL" alt="Uploaded Image">
+    </div>
+    <hr>
+    <div class="add-button">
+        <button (click)="copyImageURL()">Copy Image URL</button>
+    </div>
+  </div>
+  

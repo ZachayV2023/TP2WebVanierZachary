@@ -1,0 +1,72 @@
+.box {
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 16px;
+    border-radius: 4px;
+    margin: 20px;
+    background-color: #333; /* Set the background color */
+    color: white; /* Set text color to white */
+  }
+  
+  h2 {
+    margin-bottom: 16px;
+  }
+  
+  .input-group {
+    margin-bottom: 16px;
+  }
+  
+  .input-group label {
+    display: inline-block;
+    width: 150px;
+    color: white;
+  }
+  
+  .input-group input {
+    color: white; /* Set input text color to white */
+    background-color: #444; /* Slightly darker background for better visibility */
+    border: 1px solid #555; /* Border color */
+  }
+  
+  .image-preview {
+    width: 100%;
+    height: 100px;
+    border: 1px dashed #ccc;
+    margin-bottom: 16px;
+  }
+  
+  hr {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border-color: #ffffff; /* Make the line a bit darker for visibility */
+  }
+  
+  .add-button button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .image-preview {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%; /* 1:1 Aspect Ratio */
+    position: relative;
+  }
+  
+  .image-preview img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cover entire element */
+  }
+  

@@ -1,6 +1,4 @@
-// add-voyage.component.ts
 import { Component } from '@angular/core';
-import { VoyageService } from '../voyage.service';
 
 @Component({
   selector: 'app-add-voyage',
@@ -8,17 +6,28 @@ import { VoyageService } from '../voyage.service';
   styleUrls: ['./add-voyage.component.css']
 })
 export class AddVoyageComponent {
-  
-  constructor(private voyageService: VoyageService) {}
+  imageURL: string = '';
+  imageToCopy: string = '';
 
-  addVoyage(formData: any) {
-    this.voyageService.addVoyage(formData).subscribe(
-      (_) => {  // Remplacé 'response' par '_'
-        // Logique après l'ajout, par exemple rediriger l'utilisateur
-      },
-      (_) => {  // Remplacé 'error' par '_'
-        // Gérer les erreurs, par exemple afficher un message d'erreur
-      }
-    );
+  onImageChange(event: Event): void {
+    const fileInput = event.target as HTMLInputElement;
+
+    if (fileInput.files && fileInput.files[0]) {
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        if (e.target) {
+          this.imageURL = e.target.result as string;
+          this.imageToCopy = `${this.imageURL}?size=300`;  // Assuming this could be manipulated on the backend
+        }
+      };
+
+      reader.readAsDataURL(fileInput.files[0]);
+    }
+  }
+
+  // This function is for demonstration. In a real application, you would use clipboard API or similar to copy.
+  copyImageURL(): void {
+    console.log('URL to be copied:', this.imageToCopy);
   }
 }
