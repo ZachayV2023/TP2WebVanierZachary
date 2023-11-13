@@ -247,3 +247,4 @@ C:\Users\2037408\Desktop\TP3WebVanierZachary\TP3VanierZachary(NG)\TP3VanierZacha
 C:\Users\2037408\Desktop\TP3WebVanierZachary\TP3VanierZachary(NG)\TP3VanierZachary(NG)\obj\Debug\net6.0\TP3VanierZachary(NG).pdb
 C:\Users\2037408\Desktop\TP3WebVanierZachary\TP3VanierZachary(NG)\TP3VanierZachary(NG)\obj\Debug\net6.0\TP3VanierZachary(NG).genruntimeconfig.cache
 C:\Users\2037408\Desktop\TP3WebVanierZachary\TP3VanierZachary(NG)\TP3VanierZachary(NG)\obj\Debug\net6.0\ref\TP3VanierZachary(NG).dll
+C:\Users\2037408\Desktop\TP3WebVanierZachary\TP3VanierZachary(NG)\TP3VanierZachary(NG)\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

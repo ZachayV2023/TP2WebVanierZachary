@@ -10,7 +10,7 @@ using TP3VanierZachary_NG_.Data;
 
 namespace TP3VanierZachary_NG_.Migrations
 {
-    [DbContext(typeof(TP3VanierZachary_NG_Context))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20231106181800_InitialCreate")]
     partial class InitialCreate
     {
