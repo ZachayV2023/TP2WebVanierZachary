@@ -2,37 +2,39 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+// Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { TravelListComponent } from './travel-list/travel-list.component';
-import { TravelDetailComponent } from './travel-detail/travel-detail.component';
-import { TravelCreateComponent } from './travel-create/travel-create.component';
-import { TravelEditComponent } from './travel-edit/travel-edit.component';
-import { LocationListComponent } from './location-list/location-list.component';
-import { PhotoGalleryComponent } from './photo-gallery/photo-gallery.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+
+// Routing
 import { AppRoutingModule } from './app-routing.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './auth.interceptor';
+
+// Services
+import { AuthService } from './auth.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { VoyageCreateComponent } from './voyage-create/voyage-create.component';
+import { VoyageCardHandlerComponent } from './voyage-card-handler/voyage-card-handler.component';
+import { VoyageDetailComponent } from './voyage-detail/voyage-detail.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    TravelListComponent,
-    TravelDetailComponent,
-    TravelCreateComponent,
-    TravelEditComponent,
-    LocationListComponent,
-    PhotoGalleryComponent,
     NavbarComponent,
     FooterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    VoyageCreateComponent,
+    VoyageCardHandlerComponent,
+    VoyageDetailComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +43,7 @@ import { AuthInterceptor } from './auth.interceptor';
     FormsModule
   ],
   providers: [
+    AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

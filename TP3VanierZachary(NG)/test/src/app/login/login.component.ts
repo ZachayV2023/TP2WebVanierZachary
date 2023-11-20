@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -9,20 +10,14 @@ import { AuthService } from '../auth.service';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  errorMessage: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  onLogin(): void {
+  login(): void {
     this.authService.login(this.username, this.password).subscribe({
-      next: (response) => {
-        // Handle successful login, store the token, etc.
-        localStorage.setItem('authToken', response.token);
-        // Redirect to the desired route after login
-      },
-      error: (err) => {
-        // Handle error
-        console.error('Login error:', err);
-      }
+      next: () => this.router.navigate(['/dashboard']),
+      error: error => this.errorMessage = error.message || 'Failed to login. Please try again.'
     });
   }
 }

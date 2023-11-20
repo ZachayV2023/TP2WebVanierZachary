@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -10,25 +11,37 @@ export class RegisterComponent {
   username: string = '';
   email: string = '';
   password: string = '';
-  confirmPassword: string = ''; // Add this line
+  confirmPassword: string = '';
 
   constructor(private authService: AuthService) {}
 
-  onRegister(): void {
-    if (this.password !== this.confirmPassword) {
-      // Handle the password mismatch case
-      console.error('Passwords do not match');
-      return;
-    }
-    this.authService.register(this.username, this.email, this.password).subscribe({
-      next: (response) => {
-        // Handle successful registration
-        // Redirect to login or other actions
-      },
-      error: (err) => {
-        // Handle error
-        console.error('Registration error:', err);
-      }
+  register(): void {
+    console.log('Attempting to register with', {
+      UserName: this.username,
+      Email: this.email,
+      Password: this.password,
+      PasswordConfirm: this.confirmPassword
     });
+
+    if (this.password === this.confirmPassword) {
+      this.authService.register({ 
+        UserName: this.username, 
+        Email: this.email, 
+        Password: this.password, 
+        PasswordConfirm: this.confirmPassword 
+      }).subscribe(
+        response => {
+          console.log('Registration successful', response);
+          // TODO: Handle successful registration
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Registration failed', error.error);
+          // TODO: Handle error
+        }
+      );
+    } else {
+      console.error('Passwords do not match');
+      // TODO: Inform the user that the passwords do not match
+    }
   }
 }

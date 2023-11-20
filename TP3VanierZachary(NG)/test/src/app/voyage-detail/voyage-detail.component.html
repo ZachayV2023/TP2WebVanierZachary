@@ -1,0 +1,32 @@
+<!-- Voyage Details Container -->
+<div class="voyage-details-container">
+    
+  <!-- Title of the Voyage -->
+  <h1>{{ voyageTitle }}</h1>
+  
+  <!-- Map and Location Search Section -->
+  <div class="map-and-search">
+      <!-- Map Display -->
+      <div id="map"></div>
+
+      <!-- Location Search -->
+      <div class="location-search">
+          <input type="text" placeholder="Nouvel emplacement" #searchBox>
+          <button (click)="onVerifyLocation(searchBox.value)">✓</button>
+      </div>
+  </div>
+  
+  <!-- Location List with Photo Upload Option -->
+  <ul class="location-list">
+      <li *ngFor="let location of locations">
+          {{ location.name }}
+          <img [src]="location.imageUrl" alt="Location Image" (click)="navigateToVoyageDetail(location.id)" />
+
+          <!-- Photo Upload Placeholder with Plus Sign -->
+          <div class="photo-upload-placeholder" (click)="triggerPhotoUpload()">
+              <span>+</span>
+          </div>
+      </li>
+  </ul>
+
+</div>

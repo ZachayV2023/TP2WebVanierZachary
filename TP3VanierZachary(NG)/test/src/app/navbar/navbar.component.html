@@ -2,7 +2,8 @@
     <div class="navbar-brand">TravelApp</div>
     <ul class="navbar-nav">
         <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/login">Login</a></li>
-        <li><a routerLink="/register">Register</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
+        <li *ngIf="!isLoggedIn"><a routerLink="/register">Register</a></li>
+        <li *ngIf="isLoggedIn"><a (click)="logout()">Logout</a></li>
     </ul>
 </nav>

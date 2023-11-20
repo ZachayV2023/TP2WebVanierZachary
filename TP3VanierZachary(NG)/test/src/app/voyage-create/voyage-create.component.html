@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Create New Voyage</h2>
+    <form (ngSubmit)="onSubmit()" #voyageForm="ngForm">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" required
+                   [(ngModel)]="voyage.title" name="title">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" rows="3"
+                      [(ngModel)]="voyage.description" name="description"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Voyage Cover Image</label>
+            <input type="file" class="form-control-file" id="image" (change)="onFileSelected($event)">
+        </div>
+
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="isPublic"
+                   [(ngModel)]="voyage.isPublic" name="isPublic">
+            <label class="form-check-label" for="isPublic">Make this voyage public</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!voyageForm.form.valid">Create Voyage</button>
+    </form>
+</div>

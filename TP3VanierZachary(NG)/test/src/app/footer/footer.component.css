@@ -1,9 +1,23 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 0 auto; /* The content area will expand to fill the space */
+}
+
 .footer {
     background-color: #333;
     color: #fff;
     text-align: center;
     padding: 30px;
-    position: absolute;
-    bottom: 0;
+    flex-shrink: 0; /* Prevents the footer from shrinking */
     width: 100%;
 }

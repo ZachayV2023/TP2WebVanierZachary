@@ -1,44 +1,52 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+interface LoginResponse {
+  token: string;
+}
+
+interface RegisterData {
+  UserName: string;
+  Email: string;
+  Password: string;
+  PasswordConfirm: string;
+}
+
+@Injectable({ providedIn: 'root' })
 export class AuthService {
-  private baseUrl = 'http://localhost:5177/api/Auth'; // Update with your actual backend URL
+  private apiUrl = 'https://localhost:7011/api/Account';
+  private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
 
   constructor(private http: HttpClient) { }
 
-  register(username: string, email: string, password: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, { username, email, password }).pipe(
-      catchError(this.handleError)
-    );
+  get isLoggedIn$(): Observable<boolean> {
+    return this.isLoggedInSubject.asObservable();
   }
 
-  login(username: string, password: string): Observable<any> {
-    return this.http.post<{ token: string }>(`${this.baseUrl}/login`, { username, password }).pipe(
-      tap(response => this.setSession(response.token)),
-      catchError(this.handleError)
-    );
+  login(username: string, password: string): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/Login`, { UserName: username, Password: password })
+      .pipe(
+        tap(res => {
+          if (res && res.token) {
+            localStorage.setItem('token', res.token);
+            this.isLoggedInSubject.next(true);
+          }
+        })
+      );
+  }
+
+  register(registerData: RegisterData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/Register`, registerData);
   }
 
   logout(): void {
-    localStorage.removeItem('authToken');
-    // Also clear any other stored data related to the current user session here
-    // Redirect to login or home page if needed
+    localStorage.removeItem('token');
+    this.isLoggedInSubject.next(false);
   }
 
-  private setSession(authToken: string): void {
-    localStorage.setItem('authToken', authToken);
-    // Here you can also set the token expiration time if your server provides that information
-  }
-
-  private handleError(error: any) {
-    // Optionally transform error for user consumption
-    console.error('An error occurred:', error.error.message);
-    // Let the app keep running by returning an empty result or throwing an error
-    return throwError(error);
+  private hasToken(): boolean {
+    return !!localStorage.getItem('token');
   }
 }
